@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student_Information_System</title>
+        <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">S</div>
+            <div>
+                <h2>Campus SIS</h2>
+                <small>STUDENT SYSTEM</small>
+            </div>
+        </div>
+
+        <p class="menu-label">MAIN MENU</p>
+
+        <nav>
+            <a href="#dashboard" class="nav-link active" data-page="dashboard">
+                <span>▦</span> Dashboard
+            </a>
+            <a href="#students" class="nav-link" data-page="students">
+                <span>♙</span> Students
+            </a>
+            <a href="#about" class="nav-link" data-page="about">
+                <span>ⓘ</span> About System
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <p>Student Information System</p>
+            <small>Version 1.0</small>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button id="menuToggle" class="menu-toggle"
+                    aria-label="Toggle navigation">☰</button>
+                <div>
+                    <p class="breadcrumb">Workspace / <span id="breadcrumb">Dashboard</span></p>
+                </div>
+            </div>
+
+            <div class="admin-profile">
+                <div class="admin-avatar">A</div>
+                <div>
+                    <strong>Administrator</strong>
+                    <small>School Management</small>
+                </div>
+            </div>
+        </header>
+
+        <div class="page-content">
+
+            <!-- DASHBOARD -->
+            <section id="dashboardPage" class="page">
+                <div class="page-heading">
+                    <div>
+                        <p class="eyebrow">OVERVIEW</p>
+                        <h1>Dashboard</h1>
+                        <p class="subtitle">
+                            Welcome to your Student Information System.
+                        </p>
+                    </div>
+
+                    <button class="btn btn-primary" id="addStudentTop">
+                        + Add Student
+                    </button>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">♙</div>
+                        <p>Total Students</p>
+                        <h2 id="totalStudents">0</h2>
+                        <small>All registered students</small>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon green">✓</div>
+                        <p>Active Students</p>
+                        <h2 id="activeStudents">0</h2>
+                        <small>Currently enrolled</small>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon purple">▤</div>
+                        <p>Courses</p>
+                        <h2 id="totalCourses">5</h2>
+                        <small>Available programs</small>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon orange">◷</div>
+                        <p>Inactive Students</p>
+                        <h2 id="inactiveStudents">0</h2>
+                        <small>Inactive records</small>
+                    </div>
+                </div>
+
+                <section class="panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h2>Recent Students</h2>
+                            <p>Recently added student records.</p>
+                        </div>
+                        <button class="btn btn-light" id="viewAllStudents">
+                            View All
+                        </button>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Student</th>
+                                    <th>Student ID</th>
+                                    <th>Course</th>
+                                    <th>Year Level</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentStudents"></tbody>
+                        </table>
+                    </div>
+
+                    <div id="recentEmpty" class="empty-state">
+                        <div class="empty-icon">♙</div>
+                        <h3>No students yet</h3>
+                        <p>Add your first student to get started.</p>
+                        <button class="btn btn-primary" id="addFirstStudent">
+                            Add First Student
+                        </button>
+                    </div>
+                </section>
+            </section>
+
+            <!-- STUDENT MANAGEMENT -->
+            <section id="studentsPage" class="page hidden">
+                <div class="page-heading">
+                    <div>
+                        <p class="eyebrow">RECORD MANAGEMENT</p>
+                        <h1>Students</h1>
+                        <p class="subtitle">
+                            Add, search, update, and manage student information.
+                        </p>
+                    </div>
+
+                    <button class="btn btn-primary" id="addStudentButton">
+                        + Add Student
+                    </button>
+                </div>
+
+                <section class="panel">
+                    <div class="toolbar">
+                        <input
+                            type="search"
+                            id="searchInput"
+                            placeholder="Search by name, student ID, or course..."
+                            aria-label="Search students"
+                        >
+                        <select id="statusFilter" aria-label="Filter by status">
+                            <option value="All">All Statuses</option>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                            <option value="Graduated">Graduated</option>
+                        </select>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Student</th>
+                                    <th>Student ID</th>
+                                    <th>Email</th>
+                                    <th>Course</th>
+                                    <th>Year</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentsTable"></tbody>
+                        </table>
+                    </div>
+
+                    <div id="studentsEmpty" class="empty-state">
+                        <div class="empty-icon">⌕</div>
+                        <h3>No matching students</h3>
+                        <p>Try a different search or add a student.</p>
+                    </div>
+
+                    <div class="table-footer">
+                        <span id="recordCount">0 students</span>
+                        <button class="btn btn-light" id="exportButton">
+                            Export CSV
+                        </button>
+                    </div>
+                </section>
+            </section>
+
+            <!-- ABOUT -->
+            <section id="aboutPage" class="page hidden">
+                <div class="page-heading">
+                    <div>
+                        <p class="eyebrow">INFORMATION</p>
+                        <h1>About the System</h1>
+                        <p class="subtitle">
+                            Learn about this Student Information System.
+                        </p>
+                    </div>
+                </div>
+
+                <section class="panel about-panel">
+                    <div class="brand-icon large">S</div>
+                    <h2>Student Information System</h2>
+                    <p>
+                        This website helps organize student records in one place.
+                        You can register students, update their information,
+                        search records, track student status, and export records
+                        to a CSV file.
+                    </p>
+
+                    <h3>Technologies Used</h3>
+                    <ul>
+                        <li>HTML — website structure</li>
+                        <li>CSS — visual design and layout</li>
+                        <li>JavaScript — student record management</li>
+                        <li>Local Storage — saves records in this browser</li>
+                    </ul>
+
+                    <p class="notice">
+                        This is a front-end demonstration. It does not use a
+                        shared database or provide administrator authentication.
+                    </p>
+                </section>
+            </section>
+
+        </div>
+
+        <footer class="footer">
+            <span>© <span id="currentYear"></span> Campus SIS</span>
+            <span>Student Information System</span>
+        </footer>
+    </main>
+
+    <!-- ADD / EDIT STUDENT MODAL -->
+    <div id="studentModal" class="modal hidden">
+        <div class="modal-card">
+            <div class="modal-heading">
+                <div>
+                    <h2 id="modalTitle">Add Student</h2>
+                    <p>Enter the student's information below.</p>
+                </div>
+                <button type="button" id="closeModal" class="close-button"
+                    aria-label="Close form">&times;</button>
+            </div>
+
+            <form id="studentForm">
+                <input type="hidden" id="editIndex">
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="studentId">Student ID *</label>
+                        <input id="studentId" required
+                            placeholder="e.g. 2026-0001">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstName">First Name *</label>
+                        <input id="firstName" required
+                            placeholder="Enter first name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName">Last Name *</label>
+                        <input id="lastName" required
+                            placeholder="Enter last name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input id="email" type="email"
+                            placeholder="student@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="course">Course / Program *</label>
+                        <select id="course" required>
+                            <option value="">Select course</option>
+                            <option>BS Information Technology</option>
+                            <option>BS Computer Science</option>
+                            <option>BS Business Administration</option>
+                            <option>BS Education</option>
+                            <option>BS Accountancy</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="yearLevel">Year Level *</label>
+                        <select id="yearLevel" required>
+                            <option value="">Select year</option>
+                            <option>1st Year</option>
+                            <option>2nd Year</option>
+                            <option>3rd Year</option>
+                            <option>4th Year</option>
+                            <option>5th Year</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select id="gender">
+                            <option value="">Select gender</option>
+                            <option>Female</option>
+                            <option>Male</option>
+                            <option>Prefer not to say</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">Student Status *</label>
+                        <select id="status" required>
+                            <option>Active</option>
+                            <option>Inactive</option>
+                            <option>Graduated</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" id="cancelButton"
+                        class="btn btn-light">Cancel</button>
+                    <button type="submit" class="btn btn-primary">
+                        Save Student
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script src="java.js"></script>
+</body>
+</html>
